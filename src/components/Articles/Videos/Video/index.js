@@ -3,11 +3,14 @@ import axios from 'axios';
 import {URL} from '../../../../config';
 import style from '../../articles.css';
 import Header from './header'
+import VideosRelated from '../../../Widgets/VideosList/videosRelated/videosrelated'
 export default class index extends Component {
     
     state={
         article:[],
-        team:[]
+        team:[],
+        teams:[],
+        related:[]
     }
     componentWillMount(){
         axios.get(`${URL}/videos/?id=${this.props.match.params.id}`)
@@ -19,10 +22,27 @@ export default class index extends Component {
                                     this.setState({
                                         article,
                                         team:response.data
-                                    })
-                                      
-                                })
-                    })
+                                    });
+                                    this.getRelated();  
+                                });
+                    });
+    }
+    getRelated=()=>{
+        console.log("RELATED:",this.state);
+        
+        axios.get(`${URL}/teams`)
+                  .then(response=>{
+                      console.log(response.data);
+                        let teams=response.data;
+                        axios.get(`${URL}/videos?q=${this.state.team[0].city}&_limit=3`)
+                                    .then(response=>{
+                                            this.setState({
+                                                teams,
+                                                related:response.data
+                                            });
+                                    });
+                    });
+
     }
     render() {
         console.log("VIDEO:",this.state);
@@ -42,6 +62,10 @@ export default class index extends Component {
                         src={`https://www.youtube.com/embed/${article.url}`}
                     ></iframe>
             </div>
+            <VideosRelated
+                data={this.state.related}
+                teams={this.state.teams}
+            />
             </div>
         )
     }
