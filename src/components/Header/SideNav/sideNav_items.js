@@ -20,7 +20,7 @@ export default function sideNav_items() {
             type:style.option,
             icon:"play",
             text:"Videos",
-            link:"/videos "
+            link:"/videos"
         },
         {
             type:style.option,
