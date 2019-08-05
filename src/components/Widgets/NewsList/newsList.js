@@ -34,8 +34,8 @@ export default class NewsList extends Component {
                      
                     this.setState({
                         //this will add response data to prev items, we need this for loadmore btn
-                        items:[...this.state.items,...response.data]
-                        ,start,
+                        items:[...this.state.items,...response.data],
+                        start,
                         end
                     })
                  })
