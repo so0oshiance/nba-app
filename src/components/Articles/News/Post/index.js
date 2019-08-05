@@ -18,7 +18,7 @@ export default class NewsArticles extends Component {
                                 .then(response=>{
                                     this.setState({
                                         article,
-                                        team:response.data[0]
+                                        team:response.data
                                     })
                                       
                                 })
@@ -31,7 +31,7 @@ export default class NewsArticles extends Component {
         return (
             <div className={style.articleWrapper}>
                <Header
-                        teamData={team}
+                        teamData={team[0]}
                         date={article.date}
                         author={article.author}
                />
