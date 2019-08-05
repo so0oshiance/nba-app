@@ -25,7 +25,7 @@ export default function SliderTemplates(props) {
                                  style={{
                                      background:`url(../images/articles/${item.image})`
                                  }}></div>
-                            <Link to={`/atricles/${item.id}`}>
+                            <Link to={`/articles/${item.id}`}>
                                 <div className={style.featured_caption}>
                                     {item.title}
                                 </div>
